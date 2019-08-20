@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :publishing_houses
+  resources :authors
+  resources :books
   # mount_ember_app :frontend, to: '/'
 
   resources :articles
