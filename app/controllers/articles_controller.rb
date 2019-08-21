@@ -4,7 +4,11 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    if params[:page]
+      @articles = Article.page(params[:page][:number]).per(params[:page][:size])
+    else
+      @articles = Article.all
+    end
 
     render json: @articles
   end

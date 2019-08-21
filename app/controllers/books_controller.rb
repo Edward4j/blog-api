@@ -5,9 +5,9 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = Book.limit(params[:limit])
 
-    render json: @books
+    render json: @books, include: [:author], meta: { total: Book.count }
 
     # respond_to do |format|
     #   # format.html
