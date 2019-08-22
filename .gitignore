@@ -32,3 +32,6 @@
 
 # Ignore RubyMine IDE
 .idea/*
+
+# Ignore Dotenv
+.env

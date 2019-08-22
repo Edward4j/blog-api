@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  # mount_ember_app :frontend, to: '/'
+  # mount_ember_assets :frontend, to: "/"
+
   resources :publishing_houses
   resources :authors
   resources :books
-  # mount_ember_app :frontend, to: '/'
 
   resources :articles
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

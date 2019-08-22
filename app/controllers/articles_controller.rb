@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   # GET /articles
@@ -16,6 +17,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    render json: @article
   end
 
   # GET /articles/new
@@ -32,39 +34,51 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
 
-    respond_to do |format|
-      if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
-        format.json { render :show, status: :created, location: @article }
-      else
-        format.html { render :new }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+    if @article.save
+      render json: @article, status: :created
+    else
+      render json: @article.errors, status: :unprocessable_entity
     end
+
+    # respond_to do |format|
+    #   if @article.save
+    #     format.html { redirect_to @article, notice: 'Article was successfully created.' }
+    #     format.json { render :show, status: :created, location: @article }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @article.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
-    respond_to do |format|
-      if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-        format.json { render :show, status: :ok, location: @article }
-      else
-        format.html { render :edit }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+    if @article.update(book_params)
+      render json: @article, status: :ok
+    else
+      render json: @article.errors, status: :unprocessable_entity
     end
+
+    # respond_to do |format|
+    #   if @article.update(article_params)
+    #     format.html { redirect_to @article, notice: 'Article was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @article }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @article.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
     @article.destroy
-    respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    # respond_to do |format|
+    #   format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private

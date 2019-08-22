@@ -1,3 +1,3 @@
 EmberCli.configure do |c|
-  c.app :frontend, path: "~/projects/blog-front"
+  c.app :frontend, path: "../blog-front"
 end
