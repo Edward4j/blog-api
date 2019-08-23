@@ -89,6 +89,8 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:author, :price, :isbn, :title)
+      # params.require(:article).permit(:author, :price, :isbn, :title)
+      result = ActiveModelSerializers::Deserialization.jsonapi_parse(params)
+      result
     end
 end
