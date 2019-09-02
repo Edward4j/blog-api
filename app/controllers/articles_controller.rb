@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     if params[:page]
-      @articles = Article.page(params[:page][:number]).per(params[:page][:size])
+      @articles = Article.page(params[:page][:number]).per(params[:page][:size]).order(id: :asc)
     else
       @articles = Article.all
     end
